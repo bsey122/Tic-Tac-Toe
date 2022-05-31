@@ -9,3 +9,8 @@ const gameboard = (function () { // Module for the gameboard
         }
     }
 })();
+
+const Player = function (name, symbol) {
+    const getName = () => name;
+    const getSymbol = () => symbol;
+}
