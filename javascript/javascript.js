@@ -11,9 +11,15 @@ const gameboard = (function () { // Module for the gameboard
 })();
 
 const Player = function (name, symbol) { // Factory function to create player objects
-    const getName = () => name;
-    const getSymbol = () => symbol;
-    return {getName, getSymbol};
+    let _player = {
+        name,
+        symbol
+    };
+    const getName = () => _player.name;
+    const getSymbol = () => _player.symbol;
+    const setName = (name) => _player.name = name;
+    const setSymbol = (symbol) => _player.symbol = symbol;
+    return {getName, getSymbol, setName, setSymbol};
 }
 
 const displayController = (function () { // Module to display gameboard
