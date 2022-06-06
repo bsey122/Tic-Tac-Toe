@@ -73,9 +73,6 @@ return {displayBoard, clearBoard, getPlayerObj, __displayMove, __getMove};
 const game = (function () { // Module to control the flow of the game
     const player1 = Player('Player 1', 'x');
     const player2 = Player('Player 2', 'o');
-    
-    let player1Symbol = player1.getSymbol();
-    let player2Symbol = player2.getSymbol();
 
     let board = gameboard.board;
     
