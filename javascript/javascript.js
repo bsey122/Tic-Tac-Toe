@@ -25,8 +25,6 @@ const Player = function (name, symbol) { // Factory function to create player ob
 
 const displayController = (function () { // Module to display gameboard
     const _gameboardContainer = document.querySelector('.gameboard');
-    
-    // _gameboardContainer.addEventListener('click', __gameboardListenerFuctions);
 
     function _removeNodes(parent) {
         while (parent.firstChild) {
@@ -55,10 +53,6 @@ const displayController = (function () { // Module to display gameboard
         return player;
     }
 
-    /* function __gameboardListenerFuctions(e, currentPlayer) {
-        __displayMove(e, currentPlayer);
-        __getMove(e);
-    } */
 
     function __displayMove(e, currentPlayer) {
         if (e.target.dataset.index) {
