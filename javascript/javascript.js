@@ -26,7 +26,7 @@ const Player = function (name, symbol) { // Factory function to create player ob
 const displayController = (function () { // Module to display gameboard
     const _gameboardContainer = document.querySelector('.gameboard');
     
-    _gameboardContainer.addEventListener('click', __gameboardListenerFuctions);
+    // _gameboardContainer.addEventListener('click', __gameboardListenerFuctions);
 
     function _removeNodes(parent) {
         while (parent.firstChild) {
@@ -55,23 +55,25 @@ const displayController = (function () { // Module to display gameboard
         return player;
     }
 
-    function __gameboardListenerFuctions(e) {
-        __displayMove(e);
+    /* function __gameboardListenerFuctions(e, currentPlayer) {
+        __displayMove(e, currentPlayer);
         __getMove(e);
-    }
+    } */
 
-    function __displayMove(e) {
+    function __displayMove(e, currentPlayer) {
         if (e.target.dataset.index) {
             const move = e.target;
+            move.textContent = currentPlayer;
         }
     }
 
-    function __getMove(e) {
+    function __getMove(e, moveObj) {
         if (e.target.dataset.index) {
-            const moveValue = e.target.dataset.index;
+            moveObj.move = e.target.dataset.index;
+            return moveObj;
         }
     }
-return {displayBoard, clearBoard, getPlayerObj};
+return {displayBoard, clearBoard, getPlayerObj, __displayMove, __getMove};
 })();
 
 const game = (function () { // Module to control the flow of the game
@@ -85,9 +87,9 @@ const game = (function () { // Module to control the flow of the game
     
     function switchTurn(playerTurn) {
         if (playerTurn === 'x') {
-            return player2Symbol;
+            return player2;
         } else if (playerTurn === 'o') {
-            return player1Symbol;
+            return player1;
         } else {
             return
         }
@@ -163,6 +165,33 @@ const game = (function () { // Module to control the flow of the game
         }
         return tie;
     }
+    
+    function gameRound() {
+        const board = gameboard.board;
+        let moveObj = {};
 
-    return {player1, player2, switchTurn, isWin, isTie, board};
+        const _gameboardContainer = document.querySelector('.gameboard');
+        const result = document.querySelector('.results');
+
+        result.textContent = `${currentPlayer.getName()}'s Turn`;
+        
+        _gameboardContainer.addEventListener('click', function (e) {
+            displayController.__getMove(e, moveObj);
+            if (board[moveObj.move] === '') {
+                displayController.__displayMove(e, currentPlayer.getSymbol());
+                gameboard.addToBoard(currentPlayer.getSymbol(), moveObj.move); 
+                console.log(moveObj);
+                if (isWin(board, currentPlayer.getSymbol())) {
+                    result.textContent = `${currentPlayer.getName()} has won!`;
+                } else if (isTie(board)) {
+                    result.textContent = `It's a draw!`;
+                } else {
+                    currentPlayer = switchTurn(currentPlayer.getSymbol());
+                    result.textContent = `${currentPlayer.getName()}'s Turn`;
+                }
+            }
+        });
+    }
+
+    return {player1, player2, switchTurn, isWin, isTie, board, gameRound};
  })();
