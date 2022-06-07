@@ -8,7 +8,14 @@ const gameboard = (function () { // Module for the gameboard
             board[move] = player;
         }
     }
-    return {board, addToBoard}
+
+    function clearBoard(board) {
+        for (let i = 0; i < board.length; i++) {
+            board[i] = '';
+        }
+        return board;
+    }
+    return {board, addToBoard, clearBoard}
 })();
 
 const Player = function (name, symbol) { // Factory function to create player objects
