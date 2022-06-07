@@ -72,26 +72,26 @@ return {displayBoard, clearBoard, __displayMove, __getMove};
 })();
 
 const game = (function () { // Module to control the flow of the game
-    const player1 = Player('Player 1', 'x');
-    const player2 = Player('Player 2', 'o');
+    const _player1 = Player('Player 1', 'x');
+    const _player2 = Player('Player 2', 'o');
     let currentPlayer;
 
-    let board = gameboard.board;
+    let _board = gameboard.board;
 
     const _restartButton = document.querySelector('.restart-button');
     _restartButton.addEventListener('click', __restart);
     
-    function switchTurn(playerTurn) {
+    function _switchTurn(playerTurn) {
         if (playerTurn === 'x') {
-            return player2;
+            return _player2;
         } else if (playerTurn === 'o') {
-            return player1;
+            return _player1;
         } else {
             return
         }
     }
 
-    function isWin(board, symbol) {
+    function _isWin(board, symbol) {
         const n = 3; // size of rows and columns
         
         // Checking rows
@@ -151,7 +151,7 @@ const game = (function () { // Module to control the flow of the game
         return win;
     }
     
-    function isTie(board) {
+    function _isTie(board) {
         let tie = true;
         for (let i = 0; i < board.length; i++) {
             const element = board[i];
@@ -173,16 +173,16 @@ const game = (function () { // Module to control the flow of the game
         
         _gameboardContainer.addEventListener('click', function (e) {
             displayController.__getMove(e, moveObj);
-            if (board[moveObj.move] === '') {
+            if (_board[moveObj.move] === '') {
                 displayController.__displayMove(e, currentPlayer.getSymbol());
                 gameboard.addToBoard(currentPlayer.getSymbol(), moveObj.move); 
                 console.log(moveObj);
-                if (isWin(board, currentPlayer.getSymbol())) {
+                if (_isWin(_board, currentPlayer.getSymbol())) {
                     result.textContent = `${currentPlayer.getName()} has won!`;
-                } else if (isTie(board)) {
+                } else if (_isTie(_board)) {
                     result.textContent = `It's a draw!`;
                 } else {
-                    currentPlayer = switchTurn(currentPlayer.getSymbol());
+                    currentPlayer = _switchTurn(currentPlayer.getSymbol());
                     result.textContent = `${currentPlayer.getName()}'s Turn`;
                 }
             }
@@ -191,15 +191,15 @@ const game = (function () { // Module to control the flow of the game
 
     function __restart() {
         displayController.clearBoard();
-        gameboard.clearBoard(game.board);
+        gameboard.clearBoard(game._board);
         init();
     }
 
     function init() {
-        currentPlayer = player1;
+        currentPlayer = _player1;
         displayController.displayBoard();
         gameRound();
     }
 
-    return {player1, player2, switchTurn, isWin, isTie, board, gameRound, init};
+    return {_player1, _player2, _switchTurn, _isWin, _isTie, _board, gameRound, init};
  })();
