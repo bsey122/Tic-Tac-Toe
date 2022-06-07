@@ -46,6 +46,7 @@ const displayController = (function () { // Module to display gameboard
             for (let j = 0; j < boardSize; j++) {
                 const sqaure = document.createElement('div');
                 sqaure.setAttribute('data-index', `${(3*(i) + j)}`);
+                sqaure.classList.add('cell');
                 _gameboardContainer.appendChild(sqaure);
             }        
         }    
