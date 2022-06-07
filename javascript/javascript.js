@@ -162,7 +162,7 @@ const game = (function () { // Module to control the flow of the game
         return tie;
     }
     
-    function gameRound() {
+    function _gameRound() {
         const board = gameboard.board;
         let moveObj = {};
 
@@ -198,8 +198,8 @@ const game = (function () { // Module to control the flow of the game
     function init() {
         currentPlayer = _player1;
         displayController.displayBoard();
-        gameRound();
+        _gameRound();
     }
 
-    return {_player1, _player2, _switchTurn, _isWin, _isTie, _board, gameRound, init};
+    return {init};
  })();
