@@ -77,6 +77,9 @@ const game = (function () { // Module to control the flow of the game
     let currentPlayer;
 
     let board = gameboard.board;
+
+    const _restartButton = document.querySelector('.restart-button');
+    _restartButton.addEventListener('click', __restart);
     
     function switchTurn(playerTurn) {
         if (playerTurn === 'x') {
@@ -184,6 +187,12 @@ const game = (function () { // Module to control the flow of the game
                 }
             }
         });
+    }
+
+    function __restart() {
+        displayController.clearBoard();
+        gameboard.clearBoard(game.board);
+        init();
     }
 
     function init() {
