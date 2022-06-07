@@ -73,6 +73,7 @@ return {displayBoard, clearBoard, getPlayerObj, __displayMove, __getMove};
 const game = (function () { // Module to control the flow of the game
     const player1 = Player('Player 1', 'x');
     const player2 = Player('Player 2', 'o');
+    let currentPlayer;
 
     let board = gameboard.board;
     
@@ -184,5 +185,11 @@ const game = (function () { // Module to control the flow of the game
         });
     }
 
-    return {player1, player2, switchTurn, isWin, isTie, board, gameRound};
+    function init() {
+        currentPlayer = player1;
+        displayController.displayBoard();
+        gameRound();
+    }
+
+    return {player1, player2, switchTurn, isWin, isTie, board, gameRound, init};
  })();
