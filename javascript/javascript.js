@@ -163,7 +163,6 @@ const game = (function () { // Module to control the flow of the game
     }
     
     function _gameRound() {
-        const board = gameboard.board;
         let moveObj = {};
 
         const _gameboardContainer = document.querySelector('.gameboard');
