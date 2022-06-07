@@ -55,12 +55,6 @@ const displayController = (function () { // Module to display gameboard
         _removeNodes(_gameboardContainer);
     }
 
-    function getPlayerObj(playerObj) {
-        let player = playerObj;
-        return player;
-    }
-
-
     function __displayMove(e, currentPlayer) {
         if (e.target.dataset.index) {
             const move = e.target;
@@ -74,7 +68,7 @@ const displayController = (function () { // Module to display gameboard
             return moveObj;
         }
     }
-return {displayBoard, clearBoard, getPlayerObj, __displayMove, __getMove};
+return {displayBoard, clearBoard, __displayMove, __getMove};
 })();
 
 const game = (function () { // Module to control the flow of the game
