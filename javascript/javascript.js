@@ -191,7 +191,7 @@ const game = (function () { // Module to control the flow of the game
 
     function __restart() {
         displayController.clearBoard();
-        gameboard.clearBoard(game._board);
+        gameboard.clearBoard(_board);
         init();
     }
 
