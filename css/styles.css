@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+:root {
+    --primary-color: #743ad5;
+    --secondary-color: #d53a9d;
+    --ff: 'Rubik', sans-serif;
+    font-family: var(--ff);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+.header > h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+.results {
+    font-size: 1.5rem;
+}
+.gameboard {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    width: 500px;
+    height: 500px;
+    border-width: 10px;
+    border-style: solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.20);
+}
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: thin;
+    border-style: solid;
+    border-color: var(--primary-color);
+    font-size: 4rem;
+}
+.restart-button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    font-size: 1.2rem;
+    font-family: var(--ff);
+    background-color: var(--primary-color);
+}
