@@ -221,3 +221,5 @@ const game = (function () { // Module to control the flow of the game
 
     return {init};
  })();
+
+ game.init();
