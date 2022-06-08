@@ -69,7 +69,7 @@ const displayController = (function () { // Module to display gameboard
             return moveObj;
         }
     }
-    
+
     function switchColour(e, currentPlayer) {
         if (e.target.classList.contains('cell')) {
             if (currentPlayer === 'x') {
@@ -183,7 +183,7 @@ const game = (function () { // Module to control the flow of the game
 
         result.textContent = `${currentPlayer.getName()}'s Turn`;
         
-        _gameboardContainer.addEventListener('click', function (e) {
+        _gameboardContainer.addEventListener('click', function gameplay(e) {
             displayController.__getMove(e, moveObj);
             if (_board[moveObj.move] === '') {
                 displayController.__displayMove(e, currentPlayer.getSymbol());
@@ -193,6 +193,7 @@ const game = (function () { // Module to control the flow of the game
                     result.textContent = `${currentPlayer.getName()} has won!`;
                     currentPlayer = _switchTurn(currentPlayer.getSymbol());
                     displayController.switchColour(e, currentPlayer.getSymbol());
+                    _gameboardContainer.removeEventListener('click', gameplay);
                 } else if (_isTie(_board)) {
                     result.textContent = `It's a draw!`;
                     currentPlayer = _switchTurn(currentPlayer.getSymbol());
