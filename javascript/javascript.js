@@ -69,7 +69,19 @@ const displayController = (function () { // Module to display gameboard
             return moveObj;
         }
     }
-return {displayBoard, clearBoard, __displayMove, __getMove};
+    
+    function switchColour(e, currentPlayer) {
+        if (e.target.classList.contains('cell')) {
+            if (currentPlayer === 'x') {
+                e.target.style.color = '#d53a9d';
+            } else if (currentPlayer === 'o') {
+                e.target.style.color = '#743ad5';
+            } else {
+                return;
+            }
+        }
+    }
+return {displayBoard, clearBoard, __displayMove, __getMove, switchColour};
 })();
 
 const game = (function () { // Module to control the flow of the game
@@ -179,11 +191,16 @@ const game = (function () { // Module to control the flow of the game
                 console.log(moveObj);
                 if (_isWin(_board, currentPlayer.getSymbol())) {
                     result.textContent = `${currentPlayer.getName()} has won!`;
+                    currentPlayer = _switchTurn(currentPlayer.getSymbol());
+                    displayController.switchColour(e, currentPlayer.getSymbol());
                 } else if (_isTie(_board)) {
                     result.textContent = `It's a draw!`;
+                    currentPlayer = _switchTurn(currentPlayer.getSymbol());
+                    displayController.switchColour(e, currentPlayer.getSymbol());
                 } else {
                     currentPlayer = _switchTurn(currentPlayer.getSymbol());
                     result.textContent = `${currentPlayer.getName()}'s Turn`;
+                    displayController.switchColour(e, currentPlayer.getSymbol());
                 }
             }
         });
